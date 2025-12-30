@@ -1,8 +1,8 @@
 // GitHub API Configuration
 // These should be set as environment variables in production
-const GITHUB_OWNER = "YOUR_GITHUB_USERNAME"; // Replace with your GitHub username
-const GITHUB_REPO = "YOUR_REPO_NAME"; // Replace with your repository name
-const GITHUB_TOKEN = "YOUR_GITHUB_TOKEN"; // Replace with your GitHub token
+const GITHUB_OWNER = "AD7STORE"; // Replace with your GitHub username
+const GITHUB_REPO = "bbbb"; // Replace with your repository name
+const GITHUB_TOKEN = "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"; // Replace with your GitHub token
 const GITHUB_BRANCH = "main";
 
 // API Base URL
