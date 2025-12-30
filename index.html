@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AD7Store - Electronics E-commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">AD7<span>Store</span></div>
+        <ul class="nav-links">
+            <li><a href="#" id="home-link">Home</a></li>
+            <li><a href="#" id="products-link">Products</a></li>
+            <li><a href="#" id="cart-link">Cart <span class="cart-count" id="cart-count">0</span></a></li>
+            <li><a href="#" id="orders-link">My Orders</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <button class="btn btn-primary" id="signup-btn">Create Account</button>
+            <button class="btn btn-secondary" id="login-btn">Login</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home-section">
+        <h1 class="floating">FUTURE TECH AT YOUR FINGERTIPS</h1>
+        <p>Discover the latest electronics with cutting-edge technology. From smartphones to smart home devices, we bring innovation to your doorstep.</p>
+        <button class="btn btn-primary" id="explore-btn">Explore Products</button>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products-section">
+        <h2 class="section-title">FEATURED PRODUCTS</h2>
+        <div class="products-container" id="products-container">
+            <div class="spinner" id="products-spinner"></div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-container" id="cart-section" style="display: none;">
+        <h2 class="section-title">YOUR SHOPPING CART</h2>
+        <div class="cart-items" id="cart-items">
+            <p id="empty-cart-message">Your cart is empty. Start adding some awesome products!</p>
+        </div>
+        <div class="cart-summary" id="cart-summary" style="display: none;">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">₨0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping:</span>
+                <span id="shipping">₨250</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>Total:</span>
+                <span id="total">₨0.00</span>
+            </div>
+            <button class="btn btn-primary" id="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section class="cart-container" id="orders-section" style="display: none;">
+        <h2 class="section-title">MY ORDERS</h2>
+        <div id="orders-list">
+            <p>No orders yet. Start shopping to see your orders here!</p>
+        </div>
+    </section>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Account</h2>
+                <button class="close-modal" id="close-signup">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="signup-alert" class="alert" style="display: none;"></div>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <button class="close-modal" id="close-login">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="login-alert" class="alert" style="display: none;"></div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="product-modal-title">Product Details</h2>
+                <button class="close-modal" id="close-product">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail" id="product-detail"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Checkout</h2>
+                <button class="close-modal" id="close-checkout">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="checkout-alert" class="alert" style="display: none;"></div>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="checkout-name">Full Name</label>
+                        <input type="text" id="checkout-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-phone">Phone Number</label>
+                        <input type="tel" id="checkout-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-address">Delivery Address</label>
+                        <textarea id="checkout-address" name="address" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-whatsapp">Receive updates on WhatsApp</label>
+                        <select id="checkout-whatsapp" name="whatsapp">
+                            <option value="yes">Yes, send me updates on WhatsApp</option>
+                            <option value="no">No, don't send WhatsApp updates</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="payment-methods">
+                            <label>
+                                <input type="radio" name="payment" value="card" checked> Credit/Debit Card
+                            </label>
+                            <label>
+                                <input type="radio" name="payment" value="cod"> Cash on Delivery
+                            </label>
+                        </div>
+                    </div>
+                    <div class="summary-row summary-total" style="margin: 1.5rem 0;">
+                        <span>Total:</span>
+                        <span id="checkout-total">₨0.00</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AD7Store</h3>
+                <p>Your destination for cutting-edge electronics and tech gadgets. We bring the future to you today.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home-section">Home</a></li>
+                    <li><a href="#products-section">Products</a></li>
+                    <li><a href="#cart-section">Cart</a></li>
+                    <li><a href="#orders-section">My Orders</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> support@ad7store.com</li>
+                    <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 AD7Store. All rights reserved. | Designed with <i class="fas fa-heart"></i> for tech enthusiasts
+        </div>
+    </footer>
+
+    <script src="serverless-api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
